@@ -43,8 +43,8 @@ class ArticleController extends Controller
         ]);
 
         $body = $response->getBody();
-        $evenz = json_decode($body);
-        return $body;
+     //   $evenz = json_decode($body);
+        return $response;
 
 
 
