@@ -230,17 +230,7 @@ class ArticleController extends Controller
 
     public function index(Request $request){
 
-        $a=[
-            'location.address' => '$city',
-            'start_date.range_start' => '$startDate',
-            'start_date.range_end' => '$endDate',
-            'location.within' => '$within',
-            'location.latitude' => '$latitude',
-            'location.longitude' => '$longitude',
-            'categories' => '$category',
-            'verify' => 'false',
-            'page' => '$page_number',
-        ];
+        $a="hello world";
         echo $a;
 
 
