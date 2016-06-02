@@ -44,7 +44,7 @@ class ArticleController extends Controller
 
         $body = $response->getBody();
      //   $evenz = json_decode($body);
-        return $response;
+        return $body;
 
 
 
