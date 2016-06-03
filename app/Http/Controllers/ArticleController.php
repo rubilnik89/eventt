@@ -40,7 +40,16 @@ class ArticleController extends Controller
             ]);
 
         $body = $response->getBody();
-        return $body;
+        $evenz = json_decode($body);
+
+        foreach ($evenz->events as $event){
+
+            $event->phone_number='555-55-55';
+            $event->rating=rand(1,5);
+        }
+
+        $result = json_encode($evenz);
+        return $result;
     }
 }
 /**
