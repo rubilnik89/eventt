@@ -37,7 +37,7 @@ class ArticleController extends Controller
                 'categories' => $category,
                 'page' => $page_number,
                 'expand'=>'category,venue,ticket_classes',
-                'token'=>$token,],
+                'token'=>'OSUKWVGNBKZJWDBWKBIC',],
             'verify' => false,
             // todo: move token in .env
             //    'token'=>'OSUKWVGNBKZJWDBWKBIC',
