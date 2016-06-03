@@ -14,6 +14,7 @@ class ArticleController extends Controller
     {
         //$environment = App::environment();
         //$token = $environment["API_TOKEN"];
+        $token = env("TOKEN");
 
         $city = $request->query('city');
         $startDate = $request->query('startDate');
@@ -36,7 +37,7 @@ class ArticleController extends Controller
                 'categories' => $category,
                 'page' => $page_number,
                 'expand'=>'category,venue,ticket_classes',
-                'token'=>'OSUKWVGNBKZJWDBWKBIC',],
+                'token'=>$token,],
             'verify' => false,
             // todo: move token in .env
             //    'token'=>'OSUKWVGNBKZJWDBWKBIC',
