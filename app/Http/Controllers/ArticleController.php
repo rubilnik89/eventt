@@ -49,7 +49,8 @@ class ArticleController extends Controller
         }
 
         $result = json_encode($evenz);
-        return $result;
+        //return $result;
+        return $body;
     }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public function seatgeek(Request $request)
@@ -101,8 +102,8 @@ class ArticleController extends Controller
 
         $result = json_encode($evenz);
         //var_dump($evenz);
-        return $result;
-        
+        //return $result;
+        return $body;
 
     }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
