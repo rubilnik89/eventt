@@ -50,6 +50,8 @@ class ArticleController extends Controller
 
         $result = json_encode($evenz);
         echo gettype($result);
+        header('Content-Type: application/json');
+        echo gettype($result);
         return $result;
     }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -102,6 +104,8 @@ class ArticleController extends Controller
 
         $result = json_encode($evenz);
         //var_dump($evenz);
+        echo gettype($result);
+        header('Content-Type: application/json');
         echo gettype($result);
         return $result;
         
