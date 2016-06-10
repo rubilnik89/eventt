@@ -103,8 +103,9 @@ public function seatgeek(Request $request)
 //        }
 
     $result = json_encode($evenz);
-    var_dump($evenz);
-    //return $result;
+    //var_dump($evenz);
+    return $result;
+    
 
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
