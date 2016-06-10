@@ -49,6 +49,7 @@ class ArticleController extends Controller
         }
 
         $result = json_encode($evenz);
+        echo gettype($result);
         return $result;
     }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -101,6 +102,7 @@ class ArticleController extends Controller
 
         $result = json_encode($evenz);
         //var_dump($evenz);
+        echo gettype($result);
         return $result;
         
 
