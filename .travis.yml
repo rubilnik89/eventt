@@ -1,1 +1,1 @@
-script: ssh $USER:$PASWD@$HOST "cd ~/www/evenz && git pull"
+script: ssh -oStrictHostKeyChecking=no $USER:$PASWD@$HOST "cd ~/www/evenz && git pull"
