@@ -1,0 +1,1 @@
+script: ssh $USER:$PASWD@$HOST "cd ~/www/evenz && git pull"
