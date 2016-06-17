@@ -9,8 +9,8 @@ class UsersController extends Controller {
 
     public function addNewUser(Request $request) {
 
-        $Email = $request->query('Email');
-        $Password = $request->query('Password');
+        $Email = $request->query('email');
+        $Password = $request->query('password');
 
         $user = env("DB_USERNAME");
         $pass = env("DB_PASSWORD");
@@ -21,7 +21,7 @@ class UsersController extends Controller {
             die("Could not open connection to database server");
         }
         
-        $result=pg_query($connection,"INSERT INTO people VALUES ('$Email','$Password');");
+        $result=pg_query($connection,"INSERT INTO users VALUES ('$Email','$Password');");
         if(!$result){
             echo pg_last_error($connection);
         } else {
@@ -34,8 +34,8 @@ class UsersController extends Controller {
 
     public function authorization(Request $request) {
 
-        $Email = $request->query('Email');
-        $Password = $request->query('Password');
+        $Email = $request->query('email');
+        $Password = $request->query('password');
 
         $user = env("DB_USERNAME");
         $pass = env("DB_PASSWORD");
@@ -46,7 +46,7 @@ class UsersController extends Controller {
             die("Could not open connection to database server");
         }
         
-        $checkEmail = pg_query($connection, "SELECT email FROM people WHERE email='$Email'");
+        $checkEmail = pg_query($connection, "SELECT email FROM users WHERE email='$Email'");
         $c_line = pg_fetch_array($checkEmail);
         $c_psswd = $c_line['email'];
 
@@ -55,7 +55,7 @@ class UsersController extends Controller {
             exit;
         };
 
-        $result = pg_query($connection, "SELECT password FROM people WHERE email='$Email'");
+        $result = pg_query($connection, "SELECT password FROM users WHERE email='$Email'");
 
         $line = pg_fetch_array($result);
         $psswd = $line['password'];
