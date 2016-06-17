@@ -16,7 +16,7 @@ class UsersController extends Controller {
         $pass = env("DB_PASSWORD");
         $host = env("DB_HOST");
         $database = env("DB_DATABASE");
-        $connection = pg_connect ("host=$host dbname=$database user=$user password=$pass port=5432");        
+        $connection = pg_connect("host=$host dbname=$database user=$user password=$pass port=5432");
         if (!$connection) {
             die("Could not open connection to database server");
         }
@@ -41,7 +41,7 @@ class UsersController extends Controller {
         $pass = env("DB_PASSWORD");
         $host = env("DB_HOST");
         $database = env("DB_DATABASE");
-        $connection = pg_connect ("host=$host dbname=$database user=$user password=$pass port=5432");
+        $connection = pg_connect("host=$host dbname=$database user=$user password=$pass port=5432");
         if (!$connection) {
             die("Could not open connection to database server");
         }
