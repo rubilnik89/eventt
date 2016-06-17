@@ -14,5 +14,5 @@
 
 $app->get('search_events','ArticleController@eventsList');
 $app->get('seatgeek','ArticleController@seatgeek');
-$app->post('/api/user/create','UsersController@addNewUser');
+$app->get('/api/user/create','UsersController@addNewUser');
 $app->get('/api/user/login','UsersController@authorization');
