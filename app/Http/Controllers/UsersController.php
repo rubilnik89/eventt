@@ -7,21 +7,26 @@ use Laravel\Lumen\Routing\Controller;
 
 class UsersController extends Controller {
 
-    public function addNewUser(Request $request) {
-
-        $Email = $request->query('email');
-        $Password = $request->query('password');
-
-        $user = env("DB_USERNAME");
-        $pass = env("DB_PASSWORD");
-        $host = env("DB_HOST");
-        $database = env("DB_DATABASE");
-        $connection = pg_connect("host=$host dbname=$database user=$user password=$pass port=5432");
+    public function createConnection()
+    {
+        $dbUserName = env("DB_USERNAME");
+        $dbPassword = env("DB_PASSWORD");
+        $dbHost = env("DB_HOST");
+        $databaseName = env("DB_DATABASE_NAME");
+        $connection = pg_connect("host=$dbHost dbname=$databaseName user=$dbUserName password=$dbPassword");
         if (!$connection) {
             die("Could not open connection to database server");
         }
+        return $connection;
+    }
+
+    public function createNewUser(Request $request) {
+        $email = $request->query('email');
+        $password = $request->query('password');
+
+        $connection = $this->createConnection();
         
-        $result=pg_query($connection,"INSERT INTO users VALUES ('$Email','$Password');");
+        $result=pg_query($connection,"INSERT INTO users VALUES ('$email','$password')");
         if(!$result){
             echo pg_last_error($connection);
         } else {
@@ -32,49 +37,38 @@ class UsersController extends Controller {
 
     }
 
-    public function authorization(Request $request) {
+    public function loginUser(Request $request) {
 
-        $Email = $request->query('email');
-        $Password = $request->query('password');
+        $email = $request->query('email');
+        $password = $request->query('password');
 
-        $user = env("DB_USERNAME");
-        $pass = env("DB_PASSWORD");
-        $host = env("DB_HOST");
-        $database = env("DB_DATABASE");
-        $connection = pg_connect("host=$host dbname=$database user=$user password=$pass port=5432");
-        if (!$connection) {
-            die("Could not open connection to database server");
-        }
-        
-        $checkEmail = pg_query($connection, "SELECT email FROM users WHERE email='$Email'");
-        $c_line = pg_fetch_array($checkEmail);
-        $c_psswd = $c_line['email'];
+        $connection = $this->createConnection();
 
-        if ($c_psswd!=$Email){
-            echo "You are not register";
+        $emailResult = pg_query($connection, "SELECT email FROM users WHERE email='$email'");
+        $emailArray = pg_fetch_array($emailResult);
+        $retrievedEmail = $emailArray['email'];
+
+        if (!$retrievedEmail){
+            echo "User not registered.";
             exit;
         };
 
-        $result = pg_query($connection, "SELECT password FROM users WHERE email='$Email'");
+        $passwordResult = pg_query($connection, "SELECT password FROM users WHERE email='$email'");
+        $passwordArray = pg_fetch_array($passwordResult);
+        $retrievedPassword = $passwordArray['password'];
 
-        $line = pg_fetch_array($result);
-        $psswd = $line['password'];
+        if ($retrievedPassword == $password){
+            $userResult = pg_query($connection, "SELECT * FROM users WHERE email='$email'");
+            $userArray = pg_fetch_array($userResult);
+            $email=$userArray['email'];
 
-
-        if ($psswd == $Password){
-            $result1 = pg_query($connection, "SELECT * FROM people WHERE email='$Email'");
-            $line1 = pg_fetch_array($result1);
-
-            $email=$line1['email'];
-            $pass=$line['password'];
             echo "
                 Email: $email<br>
-                Password: $pass
             ";
-
-        } else echo 'Incorrect password';
+        } else {
+            echo 'Incorrect password';
+        }
 
         pg_close($connection);
-
     }
 }
